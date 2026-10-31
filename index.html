@@ -1,0 +1,64 @@
+<style>
+    body{
+        background-color:limegreen;
+        text-align:center;
+        font-family:courier;
+
+    }
+</style>
+<div id="root" style="border:12px solid white;background-color:aqua">
+    <br>
+    <button @click="generateNumber">Generate Number/Restart Game</button>
+
+
+    Guess A Number: <input type="number" v-model="guess">
+
+    <button @click="checkGuess">Submit</button>
+    <h1>{{message}}</h1>
+    
+</div>
+<script src="./vue2.js"></script>
+<script>
+    new Vue({
+        el: "#root",
+        data: {
+            randomNumber:0,
+            message:"",
+            guess:0,
+            count:0,
+        },
+        methods:{
+
+        generateNumber() {
+
+            this.randomNumber = Math.floor(Math.random() * 20) + 1;
+            this.message="number generated!";
+            this.count=0;
+
+        },
+            
+        checkGuess(){
+            if(this.guess==this.randomNumber){
+                this.message="you guessed it";
+            }else if(this.guess>this.randomNumber){
+                this.message="a bit smaller";
+                this.count=this.count+1
+            }else if(this.guess<this.randomNumber){
+                this.message="a bit bigger";
+                this.count=this.count+1;
+            }
+            //count = number wrong
+
+            if(this.count ==5){
+                this.message="u lose-more than 5 attempts";
+                alert("refresh the page to restart-loser");
+            }
+        },
+
+        
+        }
+        
+
+
+})
+</script>
